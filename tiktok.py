@@ -1,5 +1,7 @@
 from TikTokApi import TikTokApi
 from collections import Counter 
+import json
+from datetime import datetime
 api = TikTokApi()
 
 results = 5
@@ -106,6 +108,7 @@ def get_sound_stats(sound_id):
 
 	return vals
 
+#Returns a dictionary of all relevant sound_id information
 def get_sound(sound_id):
 	info = get_sound_info(sound_id)
 	stats = get_sound_stats(sound_id)
@@ -115,7 +118,23 @@ def get_sound(sound_id):
 		print("")
 	return sound
 
-get_sound(test)
+#Gets information for an array of sound_ids
+def get_multiple_sounds(sound_ids):
+	data = {}
+	for s in sound_ids:
+		data[s] = get_sound(s)
+	return data
+
+def save_json(data):
+	# today = datetime.date(datetime.now())
+	jason = json.dumps(data)
+	f = open("sound_data.json","w")
+	f.write(jason)
+	f.close()
+
+
+data = get_multiple_sounds([test])
+save_json(data)
 
 
 
