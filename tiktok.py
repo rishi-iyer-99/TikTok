@@ -132,8 +132,17 @@ def save_json(data):
 	f.write(jason)
 	f.close()
 
+#Return a list of Ids of the trending songs
+def get_trending_sounds():
+	music = api.discoverMusic()
+	sound_ids = []
+	for m in music:
+		sound_id = m.get("cardItem").get("id")
+		sound_ids.append(sound_id)
+	return sound_ids
 
-data = get_multiple_sounds([test])
+sound_ids = get_trending_sounds()
+data = get_multiple_sounds(sound_ids)
 save_json(data)
 
 
