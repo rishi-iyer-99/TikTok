@@ -1,7 +1,7 @@
 from TikTokApi import TikTokApi
 from collections import Counter 
 import json
-from datetime import datetime
+import datetime
 api = TikTokApi()
 
 results = 5
@@ -113,9 +113,10 @@ def get_sound(sound_id):
 	info = get_sound_info(sound_id)
 	stats = get_sound_stats(sound_id)
 	sound  = {**info, **stats} 
-	for key, value in sound.items():
-		print(key,":",value)
-		print("")
+	sound["timestamp"]=str(datetime.datetime.now().date())
+	# for key, value in sound.items():
+	# 	print(key,":",value)
+	# 	print("")
 	return sound
 
 #Gets information for an array of sound_ids
@@ -124,13 +125,6 @@ def get_multiple_sounds(sound_ids):
 	for s in sound_ids:
 		data[s] = get_sound(s)
 	return data
-
-def save_json(data):
-	# today = datetime.date(datetime.now())
-	jason = json.dumps(data)
-	f = open("sound_data.json","w")
-	f.write(jason)
-	f.close()
 
 #Return a list of Ids of the trending songs
 def get_trending_sounds():
@@ -141,9 +135,32 @@ def get_trending_sounds():
 		sound_ids.append(sound_id)
 	return sound_ids
 
-sound_ids = get_trending_sounds()
-data = get_multiple_sounds(sound_ids)
-save_json(data)
+def save_json(data):
+	# today = datetime.date(datetime.now())
+	jason = json.dumps(data)
+	f = open("sound_data.json","w")
+	f.write(jason)
+	f.close()
+
+#Returns an array of sound ids from txt file
+def read_file(filename):
+	with open(filename) as f:
+		sound_ids = f.read().splitlines() 
+	sound_ids = [int(s) for s in sound_ids]
+	return sound_ids
+
+#Get daily info of all sound ids in file
+def process_update(filename):
+	today = datetime.datetime.now().date()
+	print("Updating Data For {date}:{file}...".format(date = today,file = filename))
+	sound_ids = read_file(filename)
+	data = get_multiple_sounds(sound_ids)
+	save_json(data)
+	print("Success")
+	print("")
+
+
+process_update("our_sounds.txt")
 
 
 
