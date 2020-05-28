@@ -104,7 +104,7 @@ def get_sound_stats(sound_id):
 	vals["most_followed_username"] = most_followed_username
 	vals["verified_post"] = verified_post
 	top_hashtags = Counter(top_hashtags)
-	vals["top_hashtags"] = top_hashtags.most_common(10)
+	vals["top_hashtags"] = top_hashtags.most_common(5)
 
 	return vals
 
@@ -137,7 +137,7 @@ def get_trending_sounds():
 
 def save_json(data):
 	# today = datetime.date(datetime.now())
-	jason = json.dumps(data)
+	jason = json.dumps(data,indent=4)
 	f = open("sound_data.json","w")
 	f.write(jason)
 	f.close()
