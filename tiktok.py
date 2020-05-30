@@ -135,10 +135,10 @@ def get_trending_sounds():
 		sound_ids.append(sound_id)
 	return sound_ids
 
-def save_json(data):
-	# today = datetime.date(datetime.now())
+def save_json(data,output_file):
 	jason = json.dumps(data,indent=4)
-	f = open("sound_data.json","w")
+	path = "outputs/"+output_file
+	f = open(path,"w")
 	f.write(jason)
 	f.close()
 
@@ -150,17 +150,17 @@ def read_file(filename):
 	return sound_ids
 
 #Get daily info of all sound ids in file
-def process_update(filename):
+def process_update(input_file,output_file):
 	today = datetime.datetime.now().date()
-	print("Updating Data For {date}:{file}...".format(date = today,file = filename))
-	sound_ids = read_file(filename)
+	print("Updating Data For {date}:{file}...".format(date = today,file = input_file))
+	sound_ids = read_file(input_file)
 	data = get_multiple_sounds(sound_ids)
-	save_json(data)
+	save_json(data,output_file)
 	print("Success")
 	print("")
 
 
-process_update("our_sounds.txt")
+process_update("inputs/our_sounds.txt","our_sounds_data.json")
 
 
 

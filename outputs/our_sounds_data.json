@@ -1,0 +1,45 @@
+{
+    "6818899548363032577": {
+        "title": "Times We Had",
+        "author": "Barlito",
+        "play_url": "https://sf16-sg.muscdn.com/obj/tiktok-obj/ca6a96fd8c10936068baef640bbe0f7d.m4a",
+        "posts": 53788,
+        "total_plays": 89992483,
+        "most_plays": 7255190,
+        "total_diggs": 18182741,
+        "most_diggs": 1417193,
+        "total_comments": 392695,
+        "most_comments": 33726,
+        "total_shares": 434824,
+        "most_shares": 53683,
+        "min_duration": 5,
+        "max_duration": 59,
+        "avg_duration": 13.58585858585859,
+        "most_followed_user": 6853500,
+        "most_followed_username": "themermaidscale",
+        "verified_post": true,
+        "top_hashtags": [
+            [
+                "fyp",
+                54
+            ],
+            [
+                "foryou",
+                28
+            ],
+            [
+                "foryoupage",
+                16
+            ],
+            [
+                "viral",
+                14
+            ],
+            [
+                "greenscreen",
+                11
+            ]
+        ],
+        "timestamp": "2020-05-29"
+    }
+}
