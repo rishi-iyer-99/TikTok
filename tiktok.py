@@ -104,7 +104,10 @@ def get_sound_stats(sound_id):
 	vals["most_followed_username"] = most_followed_username
 	vals["verified_post"] = verified_post
 	top_hashtags = Counter(top_hashtags)
-	# vals["top_hashtags"] = str(top_hashtags.most_common(5))
+	top_hashtags = str(top_hashtags.most_common(5))
+	top_hashtags = top_hashtags.replace("'","")
+	print(top_hashtags)
+	vals["top_hashtags"] = top_hashtags
 
 	return vals
 

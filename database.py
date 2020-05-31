@@ -15,8 +15,6 @@ def update_table(cur,data,table_name):
 		values = ', '.join("'" + str(x).replace('/', '_') + "'" for x in list(v.values()))
 		sql = "INSERT INTO %s ( %s ) VALUES ( %s );" % (table_name, columns, values)
 		print(sql)
-		for k,val in v.items():
-			print(k,":",type(val))
 		cur.execute(sql)
 
 def create_table(cur,data,table_name):
@@ -40,7 +38,7 @@ def create_table(cur,data,table_name):
 				most_followed_user INT,
 				most_followed_username VARCHAR(500),
 				verified_post BOOLEAN,
-				-- top_hashtags VARCHAR(500),
+				top_hashtags VARCHAR(500),
 				time_stamp VARCHAR(500)
 			);""")
 	# cur.execute(sql)
