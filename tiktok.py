@@ -104,7 +104,7 @@ def get_sound_stats(sound_id):
 	vals["most_followed_username"] = most_followed_username
 	vals["verified_post"] = verified_post
 	top_hashtags = Counter(top_hashtags)
-	vals["top_hashtags"] = top_hashtags.most_common(5)
+	# vals["top_hashtags"] = str(top_hashtags.most_common(5))
 
 	return vals
 
@@ -113,7 +113,7 @@ def get_sound(sound_id):
 	info = get_sound_info(sound_id)
 	stats = get_sound_stats(sound_id)
 	sound  = {**info, **stats} 
-	sound["timestamp"]=str(datetime.datetime.now().date())
+	sound["time_stamp"]=str(datetime.datetime.now().date())
 	sound["sound_id"] = sound_id
 	# for key, value in sound.items():
 	# 	print(key,":",value)
