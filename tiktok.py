@@ -114,6 +114,7 @@ def get_sound(sound_id):
 	stats = get_sound_stats(sound_id)
 	sound  = {**info, **stats} 
 	sound["timestamp"]=str(datetime.datetime.now().date())
+	sound["sound_id"] = sound_id
 	# for key, value in sound.items():
 	# 	print(key,":",value)
 	# 	print("")
