@@ -4,15 +4,6 @@ import json
 import datetime
 api = TikTokApi()
 
-results = 5
-
-# trending = api.trending(results)
-# music = api.discoverMusic()
-# guy = api.getUserObject("chrisbrownofficial")
-# trendingChallenges = api.discoverHashtags()
-
-
-test = 6818899548363032577
 
 #Gets basic information about a music clip
 def get_sound_info(sound_id):
@@ -51,9 +42,6 @@ def get_sound_stats(sound_id):
 	posts = api.bySound(sound_id,99)
 	num_posts = len(posts)
 	for p in posts:
-		# for key, value in p.items():
-		# 	print(key,":",value)
-		# 	print("")
 		stats = p.get("itemInfos")
 		total_plays += stats.get("playCount")
 		plays = stats.get("playCount")
@@ -106,7 +94,6 @@ def get_sound_stats(sound_id):
 	top_hashtags = Counter(top_hashtags)
 	top_hashtags = str(top_hashtags.most_common(5))
 	top_hashtags = top_hashtags.replace("'","")
-	print(top_hashtags)
 	vals["top_hashtags"] = top_hashtags
 
 	return vals
@@ -141,7 +128,7 @@ def get_trending_sounds():
 
 def save_json(data,output_file):
 	jason = json.dumps(data,indent=4)
-	path = "outputs/"+output_file
+	path = output_file
 	f = open(path,"w")
 	f.write(jason)
 	f.close()
@@ -160,11 +147,11 @@ def process_update(input_file,output_file):
 	sound_ids = read_file(input_file)
 	data = get_multiple_sounds(sound_ids)
 	save_json(data,output_file)
-	print("Success")
+	print("Success, Data Written To:",output_file)
 	print("")
 
-
-process_update("inputs/our_sounds.txt","our_sounds_data.json")
+if __name__ == '__main__':
+	process_update("inputs/our_sounds.txt","outputs/our_sounds_data.json")
 
 
 

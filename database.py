@@ -1,8 +1,6 @@
 import sqlite3
 import json
-
-conn = sqlite3.connect('tiktok.db')
-cursor = conn.cursor()
+import datetime
 
 def load_json(input_file):
 	with open(input_file) as f:
@@ -10,15 +8,17 @@ def load_json(input_file):
 	return data
 
 def update_table(cur,data,table_name):
+	print("INSERTING VALUES...")
 	for v in data.values():
 		columns = ', '.join("`" + str(x).replace('/', '_') + "`" for x in v.keys())
 		values = ', '.join("'" + str(x).replace('/', '_') + "'" for x in list(v.values()))
 		sql = "INSERT INTO %s ( %s ) VALUES ( %s );" % (table_name, columns, values)
-		print(sql)
 		cur.execute(sql)
+	print(len(data.values()),"VALUE(S) INSERTED")
 
 def create_table(cur,data,table_name):
-	cur.execute("""CREATE TABLE test(
+	print("CREATING TABLE...")
+	cur.execute("""CREATE TABLE IF NOT EXISTS {}(
 				sound_id INT,
 				title VARCHAR(500),
 				author VARCHAR(500),
@@ -39,13 +39,25 @@ def create_table(cur,data,table_name):
 				most_followed_username VARCHAR(500),
 				verified_post BOOLEAN,
 				top_hashtags VARCHAR(500),
-				time_stamp VARCHAR(500)
-			);""")
-	# cur.execute(sql)
+				time_stamp VARCHAR(500),
+				PRIMARY KEY(sound_id,time_stamp)
+			);""".format(table_name))
+	print("TABLE CREATED")
 
 
-data = load_json("outputs/our_sounds_data.json")
-# create_table(cursor,data,"test")
-update_table(cursor,data,"test")
-conn.commit()
-conn.close()
+
+if __name__ == '__main__':
+	today = datetime.datetime.now().date()
+	print("UPDATING DATABASE:",today)
+	data = load_json("outputs/our_sounds_data.json")
+
+	conn = sqlite3.connect('tiktok.db')
+	cursor = conn.cursor()
+	try:
+		update_table(cursor,data,"SoundStats")
+	except:
+		create_table(cursor,data,"SoundStats")
+		update_table(cursor,data,"SoundStats")
+	conn.commit()
+	conn.close()
+	print("DATABASE UPDATED")
