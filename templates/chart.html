@@ -11,7 +11,9 @@
 	<div class="ct-chart ct-perfect-fourth"></div>
 	<script>
 
-		var getData = $.get('/data')
+		query_str = {{id}}
+		window.alert({{id}})
+		var getData = $.get(query_str)
 
 		getData.done(function(results){
 			var data = {

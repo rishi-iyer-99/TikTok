@@ -26,9 +26,9 @@ def query_sound(sound_id):
 	return templateData
 
 
-@app.route('/data')
-def data():
-	return query_sound(6789771236114171906)
+@app.route('/data/<sound_id>')
+def data(sound_id):
+	return query_sound(sound_id)
 
 @app.route("/")
 def hello():
@@ -36,8 +36,10 @@ def hello():
 
 
 @app.route('/sounds/<sound_id>')
-def sound_page(sound_id=0):
-	return render_template('chart.html')
+def sound_page(sound_id):
+	print(sound_id)
+	print(type(sound_id))
+	return render_template('chart.html',id= sound_id)
 
 
 if __name__ == '__main__':
