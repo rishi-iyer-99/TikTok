@@ -1,7 +1,8 @@
   
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 import sqlite3
 from datetime import datetime
+import json
 
 app = Flask(__name__)
 
@@ -26,7 +27,7 @@ def query_sound(sound_id):
 	return templateData
 
 
-@app.route('/data/<sound_id>')
+@app.route('/sounds/data/<sound_id>')
 def data(sound_id):
 	return query_sound(sound_id)
 
@@ -37,9 +38,9 @@ def hello():
 
 @app.route('/sounds/<sound_id>')
 def sound_page(sound_id):
-	print(sound_id)
-	print(type(sound_id))
-	return render_template('chart.html',id= sound_id)
+	val = (sound_id).__str__()
+	val = json.dumps(val)
+	return render_template('chart.html',id= val)
 
 
 if __name__ == '__main__':

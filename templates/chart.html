@@ -8,11 +8,12 @@
 </head>
 
 <body>
+	<h1>{{id}}</h1>
 	<div class="ct-chart ct-perfect-fourth"></div>
 	<script>
 
-		query_str = {{id}}
-		window.alert({{id}})
+		var query_str = "data/".concat({{id|tojson}})
+		console.log(query_str)
 		var getData = $.get(query_str)
 
 		getData.done(function(results){
