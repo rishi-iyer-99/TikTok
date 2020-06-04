@@ -13,7 +13,10 @@ def update_table(cur,data,table_name):
 		columns = ', '.join("`" + str(x).replace('/', '_') + "`" for x in v.keys())
 		values = ', '.join("'" + str(x).replace('/', '_') + "'" for x in list(v.values()))
 		sql = "INSERT INTO %s ( %s ) VALUES ( %s );" % (table_name, columns, values)
-		cur.execute(sql)
+		try:
+			cur.execute(sql)
+		except:
+			"VALUE ALREADY EXISTS"
 	print(len(data.values()),"VALUE(S) INSERTED")
 
 def create_table(cur,data,table_name):
