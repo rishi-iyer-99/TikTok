@@ -62,7 +62,7 @@ def get_sound_stats(sound_id):
 		avg_duration += duration/num_posts
 
 		follows = p.get("authorStats").get("followerCount")
-		if follows>most_followed_user:
+		if follows>=most_followed_user:
 			most_followed_user = follows
 			most_followed_username = p.get("authorInfos").get("uniqueId")
 
