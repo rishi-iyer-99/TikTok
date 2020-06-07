@@ -16,7 +16,7 @@ def update_table(cur,data,table_name):
 		try:
 			cur.execute(sql)
 		except:
-			"VALUE ALREADY EXISTS"
+			print("VALUE ALREADY EXISTS")
 	print(len(data.values()),"VALUE(S) INSERTED")
 
 def create_table(cur,data,table_name):
