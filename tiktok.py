@@ -151,7 +151,7 @@ def process_update(input_file,output_file):
 	print("")
 
 if __name__ == '__main__':
-	process_update("inputs/our_sounds.txt","outputs/our_sounds_data.json")
+	process_update("inputs/jawa_sounds.txt","outputs/jawa_sounds.txt.json")
 
 
 
