@@ -52,7 +52,7 @@ def create_table(cur,data,table_name):
 if __name__ == '__main__':
 	today = datetime.datetime.now().date()
 	print("UPDATING DATABASE:",today)
-	data = load_json("outputs/our_sounds_data.json")
+	data = load_json("outputs/jawa_sounds_data.json")
 
 	conn = sqlite3.connect('tiktok.db')
 	cursor = conn.cursor()
